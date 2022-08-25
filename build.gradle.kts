@@ -1,10 +1,9 @@
 plugins {
-    id("io.freefair.lombok") version "6.4.1" apply false
+    id("io.freefair.lombok") version "6.5.0.3" apply false
 }
 
 subprojects {
     apply(plugin = "java-library")
-    apply(plugin = "io.freefair.lombok")
 
     group = "fr.stardustenterprises.retroloader"
     version = "0.0.1"
@@ -14,8 +13,24 @@ subprojects {
         maven("https://jitpack.io")
     }
 
-    (this as ExtensionAware).extensions.configure<JavaPluginExtension>("java") {
-        this.sourceCompatibility = JavaVersion.VERSION_1_7
-        this.targetCompatibility = JavaVersion.VERSION_1_7
+    dependencies {
+        val implementation by configurations
+
+        implementation("org.jetbrains", "annotations", "23.0.0")
+    }
+
+    extensions.configure<JavaPluginExtension>("java") {
+        toolchain {
+            languageVersion.set(
+                JavaLanguageVersion.of(6)
+            )
+        }
+    }
+
+    tasks {
+        getByName("compileJava", JavaCompile::class) {
+            targetCompatibility = "1.6"
+            sourceCompatibility = "1.6"
+        }
     }
 }

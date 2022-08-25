@@ -7,4 +7,7 @@ package fr.stardustenterprises.retroloader.loader;
  * @since 0.0.1
  */
 public class RetroLoader extends ClassLoader {
+	public RetroLoader() {
+		super(null);
+	}
 }

@@ -1,29 +1,18 @@
 package fr.stardustenterprises.retroloader.engine.strategy.impl;
 
-import fr.stardustenterprises.retroloader.engine.strategy.IProcessingStrategy;
+import fr.stardustenterprises.retroloader.engine.api.JavaVersion;
+import fr.stardustenterprises.retroloader.engine.api.strategy.IProcessingStrategy;
 import org.objectweb.asm.tree.ClassNode;
 
+@IProcessingStrategy.Metadata(
+        id = "retrolambda",
+        priority = 100,
+        targetsUnder = JavaVersion.VERSION_1_8
+)
 public enum RetroLambdaStrategy implements IProcessingStrategy {
     INSTANCE;
 
-    /**
-     * @return the strategy's identifier
-     */
-    @Override
-    public String getId() {
-        return "retrolambda";
-    }
-
-    /**
-     * @return the strategy's priority order
-     */
-    @Override
-    public int getPriority() {
-        return 100;
-    }
-
-    @Override
-    public boolean adapt(ClassNode classNode) {
+    public boolean adapt(ClassNode node) {
         return false;
     }
 
